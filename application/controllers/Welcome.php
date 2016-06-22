@@ -20,6 +20,7 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
+        echo $this->config->item('fl_db_dsn');
 		$this->load->view('welcome_message');
 	}
 }

@@ -27,4 +27,4 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.sublime-project
 
 # Custom Config
-application/config/config_fl.php
+config_fl.php

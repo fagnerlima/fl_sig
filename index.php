@@ -178,7 +178,7 @@ switch (ENVIRONMENT)
  */
 	// $assign_to_config['name_of_config_item'] = 'value of config item';
 
-
+include_once './config_fl.php';
 
 // --------------------------------------------------------------------
 // END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE

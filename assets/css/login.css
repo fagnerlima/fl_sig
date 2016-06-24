@@ -1,0 +1,19 @@
+img {
+    max-width: 100%;
+}
+
+#box {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 5px #ccc;
+    margin-top: 20px;
+    padding: 10px 20px;
+}
+
+#logo {
+    padding: 10px 0;
+}
+
+h1 {
+    margin: 0 0 20px;
+}

@@ -26,5 +26,15 @@ interface CRUD
     /**
      * @return object
      */
+    public function select_all();
+
+    /**
+     * @return object
+     */
     public function select_by_id();
+
+    /**
+     * @return int
+     */
+    public function count_all();
 }

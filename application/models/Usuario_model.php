@@ -26,9 +26,23 @@ class Usuario_model extends CI_Model implements CRUD
         // TODO: Implement delete() method.
     }
 
+    public function select_all()
+    {
+        // Seleciona todos os usuários, exceto o Administrador (ID 1)
+        $query = $this->db->select(['id', 'nome', 'email', 'tipo', 'status'])->from(self::TABLE)->where('id !=', 1)->get();
+        
+        return $query->result();
+    }
+
     public function select_by_id()
     {
         // TODO: Implement select_by_id() method.
+    }
+
+    public function count_all()
+    {
+        // Retorna o total de registros menos 1 (Administrador - ID 1)
+        return $this->db->count_all(self::TABLE) - 1;
     }
 
     /**

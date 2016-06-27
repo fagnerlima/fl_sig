@@ -7,13 +7,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">FL SIG</a>
+            <a class="navbar-brand" href="<?= base_url('dashboard') ?>">FL SIG</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Usuário</a></li>
+                <li><a href="<?= base_url('dashboard') ?>">Home</a></li>
+                <li><a href="<?= base_url('usuario') ?>">Usuário</a></li>
                 <li><a href="#">Cliente</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">

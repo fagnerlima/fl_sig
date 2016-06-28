@@ -13,6 +13,7 @@ class Usuario_model extends CI_Model implements CRUD
 
     public function insert($data)
     {
+        // SHA-1 para senha
         $data['senha'] = sha1($data['senha']);
 
         return $this->db->insert(self::TABLE, $data);

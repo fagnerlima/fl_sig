@@ -26,12 +26,12 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="nome">Nome:</label>
-                        <input type="text" name="nome" id="nome" class="form-control" required value="<?= set_value('nome') ?>">
+                        <input type="text" name="nome" id="nome" class="form-control" required value="<?= $error ? set_value('nome') : '' ?>">
                     </div>
 
                     <div class="form-group">
                         <label for="email">E-mail:</label>
-                        <input type="email" name="email" id="email" class="form-control" required value="<?= set_value('email') ?>">
+                        <input type="email" name="email" id="email" class="form-control" required value="<?= $error ? set_value('email') : '' ?> ">
                     </div>
                 </div> <!--/.col-md-4 -->
 

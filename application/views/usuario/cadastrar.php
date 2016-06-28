@@ -75,7 +75,9 @@
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Salvar" class="btn btn-primary pull-right">
+                <button type="submit" class="btn btn-success pull-right">
+                    <span class="glyphicon glyphicon-ok"></span> Salvar
+                </button>
                 <a href="<?= base_url('usuario') ?>" class="btn btn-warning">
                     <span class="glyphicon glyphicon-arrow-left"></span> Cancelar</a>
             </div>

@@ -3,7 +3,7 @@
     <div class="container">
         <h1>Usuários</h1>
 
-        <p><a href="#" class="btn btn-success">
+        <p><a href="<?= base_url('usuario/cadastrar') ?>" class="btn btn-success">
                 <span class="glyphicon glyphicon-plus"></span> Cadastrar Usuário</a></p>
 
         <table class="table table-striped">
@@ -49,10 +49,10 @@
 
             <tfoot>
             <tr>
-                <td colspan="6"><b>Quantidade de usuários:</b> <?= $count_all_usuarios ?></td>
+                <td colspan="6"><b>Quantidade de usuários:</b> <?= $num_usuarios ?></td>
             </tr>
             </tfoot>
         </table>
-    </div>
+    </div> <!--/.container -->
 
 <?php $this->load->view('commons/footer'); ?>

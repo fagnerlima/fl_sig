@@ -21,7 +21,7 @@ class Login extends CI_Controller
          * Verificação de usuário autenticado
          */
         if ($this->session->userdata('login')) {
-            redirect('dashboard');
+            redirect();
         }
 
         $data['title'] = 'Login';

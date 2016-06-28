@@ -11,12 +11,12 @@ interface CRUD
      *
      * @return bool
      */
-    public function insert();
+    public function insert($data);
 
     /**
      * @return bool
      */
-    public function update();
+    public function update($id, $data);
 
     /**
      * @return bool

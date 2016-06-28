@@ -11,12 +11,14 @@ class Usuario_model extends CI_Model implements CRUD
 {
     const TABLE = 'usuario';
 
-    public function insert()
+    public function insert($data)
     {
-        // TODO: Implement insert() method.
+        $data['senha'] = sha1($data['senha']);
+
+        return $this->db->insert(self::TABLE, $data);
     }
 
-    public function update()
+    public function update($id, $data)
     {
         // TODO: Implement update() method.
     }

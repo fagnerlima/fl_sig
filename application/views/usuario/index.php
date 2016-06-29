@@ -6,20 +6,20 @@
         <p><a href="<?= base_url('usuario/cadastrar') ?>" class="btn btn-success">
                 <span class="glyphicon glyphicon-plus"></span> Cadastrar Usuário</a></p>
 
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>E-mail</th>
-                <th>Tipo</th>
-                <th>Status</th>
-                <th>Ações</th>
-            </tr>
-            </thead>
+        <?php if ($usuarios) : ?>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>Tipo</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
 
-            <tbody>
-                <?php if ($usuarios) : ?>
+                <tbody>
                     <?php foreach ($usuarios as $usuario) : ?>
                         <tr>
                             <td><?= $usuario->id ?></td>
@@ -40,19 +40,19 @@
                             </td>
                         </tr>
                     <?php endforeach; ?>
-                <?php else : ?>
-                    <tr>
-                        <td colspan="6">Não há registros.</td>
-                    </tr>
-                <?php endif; ?>
-            </tbody>
+                </tbody>
 
-            <tfoot>
-            <tr>
-                <td colspan="6"><b>Quantidade de usuários:</b> <?= $num_usuarios ?></td>
-            </tr>
-            </tfoot>
-        </table>
+                <tfoot>
+                <tr>
+                    <td colspan="6"><b>Quantidade de usuários:</b> <?= $num_usuarios ?></td>
+                </tr>
+                </tfoot>
+            </table>
+            
+            <?= $pagination ?>
+        <?php else : ?>
+            <p>Não há usuários cadastrados ou você está acessando uma página inexistente.</p>
+        <?php endif; ?>
     </div> <!--/.container -->
 
 <?php $this->load->view('commons/footer'); ?>

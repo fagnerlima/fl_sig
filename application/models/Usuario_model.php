@@ -37,9 +37,16 @@ class Usuario_model extends CI_Model implements CRUD
         return $query->result();
     }
 
-    public function select_by_id()
+    public function select_by_id($id)
     {
         // TODO: Implement select_by_id() method.
+    }
+    
+    public function select_by_page($limit, $offset)
+    {
+        $query = $this->db->select(['id', 'nome', 'email', 'tipo', 'status'])->from(self::TABLE)->where('id !=', 1)->limit($limit, $offset)->get();
+        
+        return $query->result();
     }
 
     public function count_all()

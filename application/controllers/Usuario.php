@@ -20,14 +20,34 @@ class Usuario extends CI_Controller
     public function index()
     {
         $data['title'] = 'Usuário';
+        $data['usuarios'] = null;
+        $data['pagination'] = null;
 
         $this->load->model('Usuario_model');
-        $data['usuarios'] = $this->Usuario_model->select_all();
+
+        /*
+         * Verificação do número de usuários
+         */
         $data['num_usuarios'] = $this->Usuario_model->count_all();
 
-        // Verificação de tabela sem registros
         if ($data['num_usuarios'] < 0)
             $data['num_usuarios'] = 0;
+
+        /*
+         * Geração da lista de usuários e paginação
+         */
+        if ($data['num_usuarios'] > 0) {
+            $this->load->library('pagination');
+            $this->load->helper('pagination_helper');
+
+            $config = generate_pagination_config(base_url('usuario'), $data['num_usuarios'], 10, 2, 5);
+            $this->pagination->initialize($config);
+
+            $offset = $this->uri->segment(2) ? ($this->uri->segment(2) - 1) * $config['per_page'] : 0;
+
+            $data['usuarios'] = $this->Usuario_model->select_by_page($config['per_page'], $offset);
+            $data['pagination'] = $this->pagination->create_links();
+        }
         
         $this->load->view('usuario/index', $data);
     }

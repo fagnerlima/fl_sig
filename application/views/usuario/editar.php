@@ -1,7 +1,8 @@
 <?php $this->load->view('commons/header'); ?>
 
     <div class="container">
-        <h1>Cadastrar Usuário</h1>
+        <h1>Editar Usuário</h1>
+        <h2><?= "$usuario->id: $usuario->nome" ?></h2>
 
         <?php if ($error) : ?>
             <div class="row">
@@ -26,12 +27,12 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="nome">Nome:</label>
-                        <input type="text" name="nome" id="nome" class="form-control" required value="<?= $error ? set_value('nome') : '' ?>">
+                        <input type="text" name="nome" id="nome" class="form-control" required value="<?= $error ? set_value('nome') : $usuario->nome ?>">
                     </div>
 
                     <div class="form-group">
                         <label for="email">E-mail:</label>
-                        <input type="email" name="email" id="email" class="form-control" required value="<?= $error ? set_value('email') : '' ?> ">
+                        <input type="email" name="email" id="email" class="form-control" required value="<?= $error ? set_value('email') : $usuario->email ?> ">
                     </div>
                 </div> <!--/.col-md-4 -->
 
@@ -52,10 +53,10 @@
                         <label>Tipo:</label>
                         <div class="form-control">
                             <label>
-                                <input type="radio" name="tipo" value="2" <?= $error && set_value('tipo') == 2 ? 'checked' : '' ?>> Master
+                                <input type="radio" name="tipo" value="2" <?= $error && set_value('tipo') == 2 ? 'checked' : ($usuario->tipo == 2 ? 'checked' : '') ?>> Master
                             </label>
                             <label title="Sem permissão para cadastro, edição ou exclusão de usuários e clientes.">
-                                <input type="radio" name="tipo" value="3" <?= $error && set_value('tipo') == 3 ? 'checked' : '' ?>> Limitado
+                                <input type="radio" name="tipo" value="3" <?= $error && set_value('tipo') == 3 ? 'checked' : ($usuario->tipo == 3 ? 'checked' : '') ?>> Limitado
                             </label>
                         </div>
                     </div>
@@ -64,10 +65,10 @@
                         <label>Status:</label>
                         <div class="form-control">
                             <label>
-                                <input type="radio" name="status" value="1" <?= $error && set_value('status') == 1 ? 'checked' : '' ?>> Ativo
+                                <input type="radio" name="status" value="1" <?= $error && set_value('status') == 1 ? 'checked' : ($usuario->status == 1 ? 'checked' : '') ?>> Ativo
                             </label>
                             <label>
-                                <input type="radio" name="status" value="0" <?= $error && set_value('status') == 0 ? 'checked' : '' ?>> Inativo
+                                <input type="radio" name="status" value="0" <?= $error && set_value('status') == 0 ? 'checked' : ($usuario->status == 0 ? 'checked' : '') ?>> Inativo
                             </label>
                         </div>
                     </div>

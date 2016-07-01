@@ -21,7 +21,10 @@ class Usuario_model extends CI_Model implements CRUD
 
     public function update($id, $data)
     {
-        // TODO: Implement update() method.
+        // SHA-1 para senha
+        $data['senha'] = sha1($data['senha']);
+
+        return $this->db->where('id', $id)->update(self::TABLE, $data);
     }
 
     public function delete()
@@ -39,7 +42,8 @@ class Usuario_model extends CI_Model implements CRUD
 
     public function select_by_id($id)
     {
-        // TODO: Implement select_by_id() method.
+        $query = $this->db->select(['id', 'nome', 'email', 'tipo', 'status'])->from(self::TABLE)->where('id', $id)->get();
+        return $query->result()[0];
     }
     
     public function select_by_page($limit, $offset)
@@ -56,7 +60,7 @@ class Usuario_model extends CI_Model implements CRUD
     }
 
     /**
-     * @param $data - Dados do usuário (email e senha)
+     * @param $data object Dados do usuário (email e senha)
      * @return bool
      */
     public function check_login($data)

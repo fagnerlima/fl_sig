@@ -60,6 +60,7 @@ class Login extends CI_Controller
                     $this->session->set_userdata([
                         'login' => true,
                         'id' => $user->id,
+                        'email' => $user->email,
                         'tipo' => $user->tipo,
                         'status' => $user->status
                     ]);

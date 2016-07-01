@@ -149,6 +149,9 @@ class Usuario extends CI_Controller
         $this->load->view('usuario/editar', $data);
     }
 
+    /**
+     * Validação dos formulários
+     */
     private function validation()
     {
         /*
@@ -156,6 +159,12 @@ class Usuario extends CI_Controller
          */
         $_POST['nome'] = mb_strtoupper(htmlspecialchars($_POST['nome']));
         $_POST['email'] = mb_strtolower(htmlspecialchars($_POST['email']));
+
+        /*
+         * Edição de perfil de usuário limitado
+         */
+        if ($this->session->userdata('tipo') == 3)
+            $_POST['tipo'] = '3';
 
         $this->load->library('form_validation');
 

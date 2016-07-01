@@ -53,10 +53,13 @@
                         <label>Tipo:</label>
                         <div class="form-control">
                             <label>
-                                <input type="radio" name="tipo" value="2" <?= $error && set_value('tipo') == 2 ? 'checked' : ($usuario->tipo == 2 ? 'checked' : '') ?>> Master
+                                <input type="radio" name="tipo" value="2"
+                                    <?= $error && set_value('tipo') == 2 ? 'checked' : ($usuario->tipo == 2 ? 'checked' : '') ?>
+                                    <?= $this->session->userdata('tipo') == 3 ? 'disabled' : '' ?>> Master
                             </label>
                             <label title="Sem permissão para cadastro, edição ou exclusão de usuários e clientes.">
-                                <input type="radio" name="tipo" value="3" <?= $error && set_value('tipo') == 3 ? 'checked' : ($usuario->tipo == 3 ? 'checked' : '') ?>> Limitado
+                                <input type="radio" name="tipo" value="3"
+                                    <?= $error && set_value('tipo') == 3 ? 'checked' : ($usuario->tipo == 3 ? 'checked' : '') ?>> Limitado
                             </label>
                         </div>
                     </div>
@@ -65,10 +68,12 @@
                         <label>Status:</label>
                         <div class="form-control">
                             <label>
-                                <input type="radio" name="status" value="1" <?= $error && set_value('status') == 1 ? 'checked' : ($usuario->status == 1 ? 'checked' : '') ?>> Ativo
+                                <input type="radio" name="status" value="1"
+                                    <?= $error && set_value('status') == 1 ? 'checked' : ($usuario->status == 1 ? 'checked' : '') ?>> Ativo
                             </label>
                             <label>
-                                <input type="radio" name="status" value="0" <?= $error && set_value('status') == 0 ? 'checked' : ($usuario->status == 0 ? 'checked' : '') ?>> Inativo
+                                <input type="radio" name="status" value="0"
+                                    <?= $error && set_value('status') == 0 ? 'checked' : ($usuario->status == 0 ? 'checked' : '') ?>> Inativo
                             </label>
                         </div>
                     </div>

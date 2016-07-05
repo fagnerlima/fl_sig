@@ -27,9 +27,11 @@ class Usuario_model extends CI_Model implements CRUD
         return $this->db->where('id', $id)->update(self::TABLE, $data);
     }
 
-    public function delete()
+    public function delete($id)
     {
-        // TODO: Implement delete() method.
+        $this->db->where('id', $id)->delete(self::TABLE);
+        
+        return ($this->db->affected_rows()) ? true : false;
     }
 
     public function select_all()
@@ -48,7 +50,8 @@ class Usuario_model extends CI_Model implements CRUD
     
     public function select_by_page($limit, $offset)
     {
-        $query = $this->db->select(['id', 'nome', 'email', 'tipo', 'status'])->from(self::TABLE)->where('id !=', 1)->limit($limit, $offset)->get();
+        $query = $this->db->select(['id', 'nome', 'email', 'tipo', 'status'])->from(self::TABLE)
+            ->where('id !=', 1)->limit($limit, $offset)->order_by('id', 'ASC')->get();
         
         return $query->result();
     }

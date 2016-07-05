@@ -25,6 +25,7 @@ class Usuario extends CI_Controller
             redirect();
 
         $data['title'] = 'Usuário';
+        $data['error'] = null;
         $data['usuarios'] = null;
         $data['pagination'] = null;
 
@@ -147,6 +148,30 @@ class Usuario extends CI_Controller
         }
 
         $this->load->view('usuario/editar', $data);
+    }
+
+    public function excluir($id)
+    {
+        // Verificação de usuário limitado
+        if ($this->session->userdata('tipo') == 3)
+            redirect();
+        
+        // Tentativa de exclusão do Administrador
+        if ($id == 1)
+            redirect('usuario');
+        
+        if ($this->Usuario_model->delete($id)) {
+            // Exclusão do usuário que está autenticado no momento
+            if ($this->session->userdata('id') == $id)
+                redirect('sair');
+
+            redirect('usuario');
+        }
+        else {
+            echo "<p>Erro na exclusão do usuário {$id}. <a href='" . base_url('usuario') . "'>Voltar</a></p>";
+        }
+
+        //redirect('usuario');
     }
 
     /**

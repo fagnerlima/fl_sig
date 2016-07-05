@@ -21,9 +21,10 @@ interface CRUD
     public function update($id, $data);
 
     /**
+     * @param $id int
      * @return bool
      */
-    public function delete();
+    public function delete($id);
 
     /**
      * @return object

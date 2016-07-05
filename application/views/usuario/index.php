@@ -6,6 +6,24 @@
         <p><a href="<?= base_url('usuario/cadastrar') ?>" class="btn btn-success">
                 <span class="glyphicon glyphicon-plus"></span> Cadastrar Usuário</a></p>
 
+        <?php if ($error) : ?>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="alert alert-danger">
+                        <?= $error ?>
+                    </div>
+                </div>
+            </div>
+        <?php elseif ($this->session->flashdata('success')) : ?>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="alert alert-success">
+                        <p><?= $this->session->flashdata('success') ?></p>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+
         <?php if ($usuarios) : ?>
             <table class="table table-striped">
                 <thead>
@@ -28,15 +46,11 @@
                             <td><?= $usuario->tipo == 2 ? 'Master' : 'Limitado' ?></td>
                             <td><?= $usuario->status == 1 ? 'Ativo' : 'Inativo' ?></td>
                             <td>
-                                <?php if ($this->session->userdata('tipo') < 3) : ?>
-                                    <a href="<?= base_url("usuario/editar/{$usuario->id}") ?>" class="btn btn-primary">
-                                        <span class="glyphicon glyphicon-pencil"></span> Editar</a>
-                                    <a href="<?= base_url("usuario/excluir/{$usuario->id}") ?>" class="btn btn-danger">
-                                        <span class="glyphicon glyphicon-trash"></span> Apagar</a>
-                                <?php else : ?>
-                                    <span class="text-danger">
-                                        <span class="glyphicon glyphicon-remove"></span> Limitado</span>
-                                <?php endif; ?>
+                                <a href="<?= base_url("usuario/editar/{$usuario->id}") ?>" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-pencil"></span> Editar</a>
+                                <a href="<?= base_url("usuario/excluir/{$usuario->id}") ?>" class="btn btn-danger"
+                                   onclick="return confirm('Tem certeza que deseja excluir o usuário <?= $usuario->id ?>?');">
+                                    <span class="glyphicon glyphicon-trash"></span> Apagar</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

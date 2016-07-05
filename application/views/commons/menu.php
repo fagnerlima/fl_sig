@@ -14,7 +14,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="<?= base_url() ?>">Home</a></li>
                 <li><a href="<?= base_url('usuario') ?>">Usuário</a></li>
-                <li><a href="#">Cliente</a></li>
+                <li><a href="<?= base_url('cliente') ?>">Cliente</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">

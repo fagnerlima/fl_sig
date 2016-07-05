@@ -11,6 +11,10 @@ class Usuario_model extends CI_Model implements CRUD
 {
     const TABLE = 'usuario';
 
+    /**
+     * @param $data
+     * @return bool
+     */
     public function insert($data)
     {
         // SHA-1 para senha
@@ -19,6 +23,11 @@ class Usuario_model extends CI_Model implements CRUD
         return $this->db->insert(self::TABLE, $data);
     }
 
+    /**
+     * @param $id
+     * @param $data
+     * @return bool
+     */
     public function update($id, $data)
     {
         // SHA-1 para senha
@@ -27,6 +36,10 @@ class Usuario_model extends CI_Model implements CRUD
         return $this->db->where('id', $id)->update(self::TABLE, $data);
     }
 
+    /**
+     * @param $id int
+     * @return bool
+     */
     public function delete($id)
     {
         $this->db->where('id', $id)->delete(self::TABLE);
@@ -34,6 +47,9 @@ class Usuario_model extends CI_Model implements CRUD
         return ($this->db->affected_rows()) ? true : false;
     }
 
+    /**
+     * @return object
+     */
     public function select_all()
     {
         // Seleciona todos os usuários, exceto o Administrador (ID 1)
@@ -42,12 +58,21 @@ class Usuario_model extends CI_Model implements CRUD
         return $query->result();
     }
 
+    /**
+     * @param $id
+     * @return object
+     */
     public function select_by_id($id)
     {
         $query = $this->db->select(['id', 'nome', 'email', 'tipo', 'status'])->from(self::TABLE)->where('id', $id)->get();
         return $query->result()[0];
     }
-    
+
+    /**
+     * @param $limit
+     * @param $offset
+     * @return object
+     */
     public function select_by_page($limit, $offset)
     {
         $query = $this->db->select(['id', 'nome', 'email', 'tipo', 'status'])->from(self::TABLE)
@@ -56,6 +81,9 @@ class Usuario_model extends CI_Model implements CRUD
         return $query->result();
     }
 
+    /**
+     * @return int
+     */
     public function count_all()
     {
         // Retorna o total de registros menos 1 (Administrador - ID 1)

@@ -20,10 +20,6 @@ class Cliente extends CI_Controller
 
     public function index()
     {
-        // Verificação de usuário limitado
-        if ($this->session->userdata('tipo') == 3)
-            redirect();
-        
         $data['title'] = 'Cliente';
         $data['error'] = null;
         $data['clientes'] = null;

@@ -21,4 +21,11 @@ class Dashboard extends CI_Controller
 
         $this->parser->parse('dashboard', $data);
     }
+
+    public function erro404()
+    {
+        $data['title'] = 'Erro 404 - Página Não Encontrada';
+
+        $this->load->view('erro404', $data);
+    }
 }

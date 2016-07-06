@@ -17,7 +17,7 @@ class Cliente_model extends CI_Model implements CRUD
      */
     public function insert($data)
     {
-        
+        return $this->db->insert(self::TABLE, $data);
     }
 
     /**

@@ -26,7 +26,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="nome">Nome:</label>
-                        <input type="text" name="nome" id="nome" class="form-control" required value="<?= $error ? set_value('nome') : '' ?>">
+                        <input type="text" name="nome" id="nome" class="form-control" required value="<?= $error ? set_value('nome') : '' ?>" autofocus>
                     </div>
 
                     <div class="form-group">

@@ -1,9 +1,9 @@
 <?php $this->load->view('commons/header'); ?>
 
     <div class="container">
-        <h1>Cadastrar Usuário</h1>
+        <h1>Editar Cliente</h1>
 
-        <?php $this->load->view('usuario/form'); ?>
+        <?php $this->load->view('cliente/form'); ?>
     </div> <!--/.container -->
 
 <?php $this->load->view('commons/footer'); ?>

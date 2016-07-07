@@ -66,23 +66,8 @@ class Usuario extends CI_Controller
         $data['error'] = null;
 
         if ($this->input->post()) {
-            /*
-             * Tratamento das informações
-             */
-            $_POST['nome'] = mb_strtoupper(htmlspecialchars($_POST['nome']));
-            $_POST['email'] = mb_strtolower(htmlspecialchars($_POST['email']));
-
-            $this->load->library('form_validation');
-
-            /*
-             * Regras de validação das informações
-             */
-            $this->form_validation->set_rules('nome', 'Nome', 'required|trim|min_length[6]|max_length[60]');
-            $this->form_validation->set_rules('email', 'E-mail', 'required|trim|valid_email|max_length[60]|is_unique[usuario.email]');
-            $this->form_validation->set_rules('senha', 'Senha', 'required|min_length[4]|max_length[20]');
-            $this->form_validation->set_rules('confirmacao_senha', 'Confirmação de Senha', 'required|matches[senha]');
-            $this->form_validation->set_rules('tipo', 'Tipo', 'required|exact_length[1]|in_list[2,3]');
-            $this->form_validation->set_rules('status', 'Status', 'required|exact_length[1]|in_list[1,0]');
+            // Validação do formulário
+            $this->validation();
 
             /*
              * Validação das Informações
@@ -106,41 +91,35 @@ class Usuario extends CI_Controller
         $this->load->view('usuario/cadastrar', $data);
     }
 
-    public function editar() {
+    public function editar($id) {
         $data['title'] = 'Editar Usuário';
         $data['error'] = null;
-        $data['id'] = $this->uri->segment(3);
         $data['usuario'] = null;
 
         // Verificação de tentativa de edição de outro usuário por um usuário limitado
-        if ($this->session->userdata('tipo') == 3 && $data['id'] != $this->session->userdata('id'))
+        if ($this->session->userdata('tipo') == 3 && $id != $this->session->userdata('id'))
             redirect();
 
         // Verificação de tentativa de edição do Administrador
-        if ($data['id'] == 1 && $this->session->userdata('id') != 1)
+        if ($id == 1 && $this->session->userdata('id') != 1)
             redirect('usuario');
 
-        $data['usuario'] = $this->Usuario_model->select_by_id($data['id']);
+        $data['usuario'] = $this->Usuario_model->select_by_id($id);
 
         if ($this->input->post()) {
-            // Método privado de validação do formulário
+            // Validação do formulário
             $this->validation();
 
-            /*
-             * Validação das Informações
-             */
             if (!$this->form_validation->run()) {
                 $data['error'] = validation_errors();
             } else {
                 // Exclui o valor de confirmação de senha, pois não existe no BD.
                 unset($_POST['confirmacao_senha']);
 
-                /*
-                 * Atualização no BD
-                 */
-                if ($this->Usuario_model->update($data['id'], $_POST)) {
+                // Atualização no BD
+                if ($this->Usuario_model->update($id, $_POST)) {
                     $this->session->set_flashdata('success', 'Atualização efetuada com sucesso!');
-                    $data['usuario'] = $this->Usuario_model->select_by_id($data['id']);
+                    $data['usuario'] = $this->Usuario_model->select_by_id($id);
                 }
                 else
                     $data['error'] = 'Ocorreu uma falha na atualização.';
@@ -167,11 +146,8 @@ class Usuario extends CI_Controller
 
             redirect('usuario');
         }
-        else {
+        else
             echo "<p>Erro na exclusão do usuário {$id}. <a href='" . base_url('usuario') . "'>Voltar</a></p>";
-        }
-
-        //redirect('usuario');
     }
 
     /**
@@ -188,7 +164,7 @@ class Usuario extends CI_Controller
         /*
          * Edição de perfil de usuário limitado
          */
-        if ($this->session->userdata('tipo') == 3)
+        if ($this->uri->segment(2) == 'editar' && $this->session->userdata('tipo') == 3)
             $_POST['tipo'] = '3';
 
         $this->load->library('form_validation');

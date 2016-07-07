@@ -27,7 +27,7 @@ class Cliente_model extends CI_Model implements CRUD
      */
     public function update($id, $data)
     {
-        // TODO: Implement update() method.
+        return $this->db->where('id', $id)->update(self::TABLE, $data);
     }
 
     /**
@@ -36,7 +36,9 @@ class Cliente_model extends CI_Model implements CRUD
      */
     public function delete($id)
     {
-        // TODO: Implement delete() method.
+        $this->db->where('id', $id)->delete(self::TABLE);
+
+        return ($this->db->affected_rows()) ? true : false;
     }
 
     /**
@@ -53,7 +55,9 @@ class Cliente_model extends CI_Model implements CRUD
      */
     public function select_by_id($id)
     {
-        // TODO: Implement select_by_id() method.
+        $query = $this->db->select('*')->from(self::TABLE)->where('id', $id)->get();
+        
+        return $query->result()[0];
     }
 
     /**

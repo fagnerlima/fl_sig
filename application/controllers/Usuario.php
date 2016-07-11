@@ -25,7 +25,6 @@ class Usuario extends CI_Controller
             redirect();
 
         $data['title'] = 'Usuário';
-        $data['error'] = null;
         $data['usuarios'] = null;
         $data['pagination'] = null;
 
@@ -178,7 +177,11 @@ class Usuario extends CI_Controller
         $this->form_validation->set_rules('tipo', 'Tipo', 'required|exact_length[1]|in_list[2,3]');
         $this->form_validation->set_rules('status', 'Status', 'required|exact_length[1]|in_list[1,0]');
 
-        $usuario_email = $this->Usuario_model->select_by_id($this->uri->segment(3))->email;
+        if ($this->uri->segment(2) == 'editar')
+            $usuario_email = $this->Usuario_model->select_by_id($this->uri->segment(3))->email;
+        else
+            $usuario_email = null;
+
         $is_unique = ($this->uri->segment(2) == 'cadastrar' || $_POST['email'] != $usuario_email ? '|is_unique[usuario.email]' : '');
         $this->form_validation->set_rules('email', 'E-mail', 'required|trim|valid_email|max_length[60]' . $is_unique);
     }

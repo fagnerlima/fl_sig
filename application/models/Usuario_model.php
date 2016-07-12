@@ -36,10 +36,16 @@ class Usuario_model extends CRUD
     }
 
     public function select_by_page($limit, $offset, $columns = ['id', 'nome', 'email', 'tipo', 'status'],
-                                   $where1 = 'id !=', $where2 = 1)
+                                   $where = ['id !=' => 1])
     {
-        return parent::select_by_page($limit, $offset, $columns, $where1, $where2);
+        return parent::select_by_page($limit, $offset, $columns, $where);
     }
+
+    public function count_all()
+    {
+        return parent::count_all() - 1;
+    }
+
 
     /**
      * Realiza a autenticação do usuário, verificando e-mail e senha.
@@ -49,7 +55,7 @@ class Usuario_model extends CRUD
      */
     public function check_login($data)
     {
-        $query = $this->db->select(['id', 'email', 'tipo', 'status'])->from(parent::$table)->where([
+        $query = $this->db->select(['id', 'email', 'tipo', 'status'])->from($this->table)->where([
             'email' => $data['email'],
             'senha' => sha1($data['senha'])
         ])->get();

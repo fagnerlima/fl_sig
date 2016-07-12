@@ -10,7 +10,7 @@ abstract class CRUD extends CI_Model
     /**
      * @var string Nome da tabela.
      */
-    protected static $table;
+    protected $table;
 
     /**
      * CRUD constructor.
@@ -18,7 +18,7 @@ abstract class CRUD extends CI_Model
      */
     public function __construct($table)
     {
-        self::$table = $table;
+        $this->table = $table;
     }
 
     /**
@@ -29,7 +29,7 @@ abstract class CRUD extends CI_Model
      */
     public function insert($data)
     {
-        return $this->db->insert(self::$table, $data);
+        return $this->db->insert($this->table, $data);
     }
 
     /**
@@ -41,7 +41,7 @@ abstract class CRUD extends CI_Model
      */
     public function update($id, $data)
     {
-        return $this->db->where('id', $id)->update(self::$table, $data);
+        return $this->db->where('id', $id)->update($this->table, $data);
     }
 
     /**
@@ -52,7 +52,7 @@ abstract class CRUD extends CI_Model
      */
     public function delete($id)
     {
-        $this->db->where('id', $id)->delete(self::$table);
+        $this->db->where('id', $id)->delete($this->table);
 
         return ($this->db->affected_rows() == 1 ? true : false);
     }
@@ -66,7 +66,8 @@ abstract class CRUD extends CI_Model
      */
     public function select_by_id($id, $columns = '*')
     {
-        $query = $this->db->select($columns)->from(self::$table)->where('id', $id)->get();
+        $this->db->select($columns)->from($this->table)->where('id', $id);
+        $query = $this->db->get();
 
         return $query->result()[0];
     }
@@ -77,15 +78,18 @@ abstract class CRUD extends CI_Model
      * @param $data array Colunas a serem selecionadas.
      * @param $limit int Limite de registros.
      * @param $offset int Deslocamento dos registros.
-     * @param null $where1 1º parâmetro de condição (opcional).
-     * @param null $where2 2º parâmetro de condição (opcional).
+     * @param $where array Cláusula where.
      * @return object Registros por página.
      */
-    public function select_by_page($limit, $offset, $columns = '*', $where1 = null, $where2 = null)
+    public function select_by_page($limit, $offset, $columns = '*', $where = null)
     {
-        $query = $this->db->select($columns)->from(self::$table)->where($where1, $where2)
-            ->limit($limit, $offset)->order_by('id', 'ASC')->get();
-        
+        $this->db->select($columns)->from($this->table)->limit($limit, $offset)->order_by('id', 'ASC');
+
+        if ($where)
+            $this->db->where($where);
+
+        $query = $this->db->get();
+
         return $query->result();
     }
 
@@ -96,6 +100,6 @@ abstract class CRUD extends CI_Model
      */
     public function count_all()
     {
-        return $this->db->count_all(self::$table);
+        return $this->db->count_all($this->table);
     }
 }

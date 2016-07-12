@@ -61,7 +61,7 @@ abstract class CRUD extends CI_Model
      * Seleciona um registro da tabela pelo ID.
      *
      * @param $id int ID do registro.
-     * @param $data array Colunas a serem selecionadas.
+     * @param $columns array Colunas da tabela.
      * @return object Registro do ID especificado.
      */
     public function select_by_id($id, $columns = '*')
@@ -75,9 +75,9 @@ abstract class CRUD extends CI_Model
     /**
      * Seleciona registros da tabela por página.
      *
-     * @param $data array Colunas a serem selecionadas.
      * @param $limit int Limite de registros.
      * @param $offset int Deslocamento dos registros.
+     * @param $columns array Colunas da tabela.
      * @param $where array Cláusula where.
      * @return object Registros por página.
      */

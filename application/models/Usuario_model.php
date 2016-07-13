@@ -55,7 +55,7 @@ class Usuario_model extends CRUD
      */
     public function check_login($data)
     {
-        $query = $this->db->select(['id', 'email', 'tipo', 'status'])->from($this->table)->where([
+        $query = $this->db->select(['id', 'email', 'tipo', 'status'])->from($this->get_table())->where([
             'email' => $data['email'],
             'senha' => sha1($data['senha'])
         ])->get();

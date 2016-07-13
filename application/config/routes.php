@@ -53,7 +53,12 @@ $route['default_controller'] = 'dashboard';
 $route['404_override'] = 'dashboard/erro404';
 $route['translate_uri_dashes'] = FALSE;
 
+// Logoff
 $route['sair'] = 'login/sair';
 
+/*
+ * Listagens paginadas
+ */
 $route['usuario/(:num)'] = 'usuario/index/$1';
 $route['cliente/(:num)'] = 'cliente/index/$1';
+$route['categoria_produto/(:num)'] = 'categoria_produto/index/$1';

@@ -75,6 +75,34 @@ class Categoria_Produto extends CI_Controller
 
         $this->load->view('categoria_produto/cadastrar', $data);
     }
+    
+    public function editar($id)
+    {
+        $data['title'] = 'Editar Categoria de Produto';
+        $data['error'] = null;
+        $data['categoria_produto'] = null;
+
+        $data['categoria_produto'] = $this->Categoria_Produto_model->select_by_id($id);
+
+        if ($_POST) {
+            // Validação do formulário
+            $this->validation();
+
+            if (!$this->form_validation->run()) {
+                $data['error'] = validation_errors();
+            } else {
+                // Atualização no BD
+                if ($this->Categoria_Produto_model->update($id, $_POST)) {
+                    $this->session->set_flashdata('success', 'Atualização efetuada com sucesso!');
+                    $data['categoria_produto'] = $this->Categoria_Produto_model->select_by_id($id);
+                }
+                else
+                    $data['error'] = 'Ocorreu uma falha na atualização.';
+            }
+        }
+
+        $this->load->view('categoria_produto/editar', $data);
+    }
 
     /**
      * Validação dos formulários

@@ -20,7 +20,7 @@ class Categoria_Produto extends CI_Controller
 
     public function index()
     {
-        $data['title'] = 'Categorias de Produtos';
+        $data['title'] = 'Categoria de Produto';
         $data['categorias'] = null;
         $data['pagination'] = null;
 

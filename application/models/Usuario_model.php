@@ -36,9 +36,9 @@ class Usuario_model extends CRUD
     }
 
     public function select_by_page($limit, $offset, $columns = ['id', 'nome', 'email', 'tipo', 'status'],
-                                   $where = ['id !=' => 1])
+                                   $where = ['id !=' => 1], $join = null)
     {
-        return parent::select_by_page($limit, $offset, $columns, $where);
+        return parent::select_by_page($limit, $offset, $columns, $where, $join);
     }
 
     public function count_all()

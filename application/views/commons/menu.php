@@ -42,8 +42,8 @@
                         Produto
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="<?= base_url('usuario') ?>">Listar Produtos</a></li>
-                        <li><a href="<?= base_url('usuario/cadastrar') ?>">Cadastrar Produto</a></li>
+                        <li><a href="<?= base_url('produto') ?>">Listar Produtos</a></li>
+                        <li><a href="<?= base_url('produto/cadastrar') ?>">Cadastrar Produto</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="<?= base_url('categoria_produto') ?>">Listar Categorias</a></li>
                         <li><a href="<?= base_url('categoria_produto/cadastrar') ?>">Cadastrar Categoria</a></li>

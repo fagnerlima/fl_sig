@@ -97,12 +97,15 @@ abstract class CRUD extends CI_Model
      * @param $where array Cláusula where.
      * @return object Registros por página.
      */
-    public function select_by_page($limit, $offset, $columns = '*', $where = null)
+    public function select_by_page($limit, $offset, $columns = '*', $where = null, $join = null)
     {
         $this->db->select($columns)->from($this->table)->limit($limit, $offset)->order_by('id', 'ASC');
 
         if ($where)
             $this->db->where($where);
+
+        if ($join)
+            $this->db->join($join[0], $join[1]);
 
         $query = $this->db->get();
 

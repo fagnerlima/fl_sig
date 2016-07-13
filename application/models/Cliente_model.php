@@ -16,8 +16,8 @@ class Cliente_model extends CRUD
 
     public function select_by_page($limit, $offset,
                                    $columns = ['id', 'nome', 'sobrenome', 'end_uf', 'end_cidade', 'email'],
-                                   $where = null)
+                                   $where = null, $join = null)
     {
-        return parent::select_by_page($limit, $offset, $columns, $where);
+        return parent::select_by_page($limit, $offset, $columns, $where, $join);
     }
 }

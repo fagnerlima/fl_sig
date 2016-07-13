@@ -25,7 +25,7 @@
                             <a href="<?= base_url("categoria_produto/editar/{$categoria->id}") ?>" class="btn btn-primary">
                                 <span class="glyphicon glyphicon-pencil"></span> Editar</a>
                             <a href="<?= base_url("categoria_produto/excluir/{$categoria->id}") ?>" class="btn btn-danger"
-                               onclick="return confirm('Tem certeza que deseja excluir o usuário <?= $categoria->id ?>?');">
+                               onclick="return confirm('Tem certeza que deseja excluir a categoria <?= $categoria->id ?>?');">
                                 <span class="glyphicon glyphicon-trash"></span> Apagar</a>
                         </td>
                     </tr>

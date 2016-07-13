@@ -74,6 +74,31 @@ abstract class CRUD extends CI_Model
     }
 
     /**
+     * Seleciona todos os registros da tabela.
+     * 
+     * @param string $columns Colunas da tabela.
+     * @param array $where Cláusula where.
+     * @param array $join Cláusula join.
+     * @return object Registros da tabela.
+     */
+    public function select_all($columns = '*', $where = null, $join = null, $order_by = null)
+    {
+        $query = $this->db->select($columns)->from($this->table);
+
+        if ($where)
+            $this->db->where($where);
+
+        if ($join)
+            $this->db->join($join[0], $join[1]);
+
+        $order_by ? $this->db->order_by($order_by[0], $order_by[1]) : $this->db->order_by('id', 'ASC');
+
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+
+    /**
      * Seleciona um registro da tabela pelo ID.
      *
      * @param $id int ID do registro.
@@ -95,6 +120,7 @@ abstract class CRUD extends CI_Model
      * @param $offset int Deslocamento dos registros.
      * @param $columns array Colunas da tabela.
      * @param $where array Cláusula where.
+     * @param $join array Cláusula join.
      * @return object Registros por página.
      */
     public function select_by_page($limit, $offset, $columns = '*', $where = null, $join = null)

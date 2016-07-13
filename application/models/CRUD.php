@@ -20,12 +20,18 @@ abstract class CRUD extends CI_Model
     {
         $this->set_table($table);
     }
-    
+
+    /**
+     * @return string Nome da tabela.
+     */
     public function get_table()
     {
         return $this->table;
     }
-    
+
+    /**
+     * @param $table string Nome da tabela.
+     */
     public function set_table($table)
     {
         $this->table = $table;

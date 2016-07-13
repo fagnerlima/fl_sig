@@ -14,11 +14,6 @@ class Cliente_model extends CRUD
         parent::__construct('cliente');
     }
 
-    public function select_by_id($id, $columns = '*')
-    {
-        return parent::select_by_id($id, $columns);
-    }
-
     public function select_by_page($limit, $offset,
                                    $columns = ['id', 'nome', 'sobrenome', 'end_uf', 'end_cidade', 'email'],
                                    $where = null)

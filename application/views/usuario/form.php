@@ -1,6 +1,6 @@
 <?php if ($error) : ?>
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="alert alert-danger">
                 <?= $error ?>
             </div>
@@ -8,7 +8,7 @@
     </div>
 <?php elseif ($this->session->flashdata('success')) : ?>
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="alert alert-success">
                 <p><?= $this->session->flashdata('success') ?></p>
             </div>
@@ -88,7 +88,7 @@
                 </div>
             </div>
         </div> <!--/.col-md-4 -->
-    </div>
+    </div> <!--/.row -->
 
     <div class="form-group">
         <!-- Salvar -->

@@ -47,4 +47,50 @@ class Categoria_Produto extends CI_Controller
 
         $this->load->view('categoria_produto/index', $data);
     }
+
+    public function cadastrar()
+    {
+        $data['title'] = 'Cadastrar Categoria de Produto';
+        $data['error'] = null;
+
+        if ($_POST) {
+            // Validação do formulário
+            $this->validation();
+
+            /*
+             * Validação das Informações
+             */
+            if (!$this->form_validation->run()) {
+                $data['error'] = validation_errors();
+            } else {
+                /*
+                 * Inserção no BD
+                 */
+                if ($this->Categoria_Produto_model->insert($_POST))
+                    $this->session->set_flashdata('success', 'Cadastro efetuado com sucesso!');
+                else
+                    $data['error'] = 'Ocorreu uma falha no cadastro.';
+            }
+        }
+
+        $this->load->view('categoria_produto/cadastrar', $data);
+    }
+
+    /**
+     * Validação dos formulários
+     */
+    private function validation()
+    {
+        /*
+         * Tratamento das informações
+         */
+        $_POST['descricao'] = mb_strtoupper(htmlspecialchars($_POST['descricao']));
+
+        $this->load->library('form_validation');
+
+        /*
+         * Regras de validação das informações
+         */
+        $this->form_validation->set_rules('descricao', 'Descrição', 'required|trim|min_length[3]|max_length[60]');
+    }
 }

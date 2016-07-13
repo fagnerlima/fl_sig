@@ -103,6 +103,14 @@ class Categoria_Produto extends CI_Controller
 
         $this->load->view('categoria_produto/editar', $data);
     }
+    
+    public function excluir($id)
+    {
+        if ($this->Categoria_Produto_model->delete($id))
+            redirect('categoria_produto');
+        else
+            echo "<p>Erro na exclusão da categoria {$id}. <a href='" . base_url('categoria_produto') . "'>Voltar</a></p>";
+    }
 
     /**
      * Validação dos formulários

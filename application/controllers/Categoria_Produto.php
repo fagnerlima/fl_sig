@@ -10,6 +10,9 @@ class Categoria_Produto extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+
+        if (!$this->session->userdata('login'))
+            redirect('login');
         
         $this->load->helper('form');
         $this->load->model('Categoria_Produto_model');
